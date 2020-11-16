@@ -10,7 +10,7 @@ C  3.) It uses Acreil's filter bank abstraction (fbank~) to randomly filter the 
 C
 C  It is writed in vanilla Pure Data using pd 0.50.0
 C
-C  Please see https://youtu.be/xxxxxxxxxxxxx for an example of the use of this
+C  Please see https://youtu.be/ly3TR07pEJQ for an example of the use of this
 C  Pure Data patch.
 C
 C----------------------------------------------------------------------------------
