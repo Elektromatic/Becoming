@@ -1,0 +1,96 @@
+#N canvas 48 114 622 505 12;
+#X obj 297 257 midiout;
+#X obj 340 211 select 0 1;
+#X msg 340 231 252;
+#X msg 373 231 250;
+#X msg 297 231 248;
+#X obj 297 211 metro;
+#X obj 379 342 outlet;
+#X obj 136 302 f 0;
+#X obj 136 323 + 1;
+#X obj 170 322 sel 0;
+#X obj 170 342 outlet;
+#X text 56 36 Send a midi clock out from pd;
+#X floatatom 346 191 5 0 0 1 ms_for_midi_1/96th_note - -;
+#X obj 346 172 expr (60000/$f1/24);
+#X text 354 343 bpm;
+#N canvas 798 113 632 468 copyrightInfo 0;
+#X text 74 306 j.raski@gmail.com;
+#X text 43 19 This program creates generative music on an electronic
+synthesiser. Copyright (C) 2020 Jerry Z. Raski This program is free
+software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation \, either version 3 of the License \, or (at your option)
+any later version. This program is distributed in the hope that it
+will be useful \, but WITHOUT ANY WARRANTY \; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details. You should have received
+a copy of the GNU General Public License along with this program. If
+not \, see <https://www.gnu.org/licenses/>.;
+#X restore 75 398 pd copyrightInfo;
+#X text 350 257 the clock goes out here;
+#X obj 265 302 f 0;
+#X obj 265 323 + 1;
+#X obj 299 322 sel 0;
+#X obj 299 342 outlet;
+#X text 356 106 stop bang;
+#X text 223 105 start bang;
+#X obj 297 131 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 297 106 f 1;
+#X obj 330 106 f 0;
+#X obj 330 127 s reset;
+#X obj 346 152 inlet;
+#X text 453 424 248 = clock pulse;
+#X text 453 435 250 = start;
+#X text 453 446 251 = continue;
+#X text 453 457 252 = stop;
+#X obj 170 302 mod 3;
+#X text 96 343 1/32 notes;
+#X text 225 342 1/16 notes;
+#X obj 407 231 print clk_msg;
+#X obj 263 59 f 0;
+#X obj 263 84 + 1;
+#X floatatom 230 84 4 0 0 0 - - -;
+#X obj 297 84 sel 0 1;
+#X obj 297 59 mod 2;
+#X obj 263 36 inlet;
+#X obj 299 302 mod 6;
+#X obj 58 183 s engage;
+#X connect 1 0 2 0;
+#X connect 1 1 3 0;
+#X connect 1 2 35 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X connect 5 0 7 0;
+#X connect 5 0 17 0;
+#X connect 7 0 8 0;
+#X connect 8 0 32 0;
+#X connect 9 0 10 0;
+#X connect 12 0 5 1;
+#X connect 13 0 12 0;
+#X connect 17 0 18 0;
+#X connect 18 0 42 0;
+#X connect 19 0 20 0;
+#X connect 23 0 1 0;
+#X connect 23 0 43 0;
+#X connect 23 0 5 0;
+#X connect 24 0 23 0;
+#X connect 25 0 23 0;
+#X connect 25 0 26 0;
+#X connect 27 0 13 0;
+#X connect 27 0 6 0;
+#X connect 32 0 7 1;
+#X connect 32 0 9 0;
+#X connect 36 0 37 0;
+#X connect 36 0 38 0;
+#X connect 36 0 39 0;
+#X connect 37 0 40 0;
+#X connect 39 0 24 0;
+#X connect 39 1 25 0;
+#X connect 40 0 36 1;
+#X connect 41 0 36 0;
+#X connect 42 0 17 1;
+#X connect 42 0 19 0;

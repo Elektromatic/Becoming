@@ -1,0 +1,131 @@
+#N canvas 865 53 718 734 12;
+#X obj 61 419 loadbang;
+#X obj 60 502 loadbang;
+#X obj 60 542 print -n;
+#X obj 156 105 midiClockOut;
+#X obj 156 69 bng 30 250 50 0 reset go Go -22 7 0 10 -204786 -1 -1
+;
+#X obj 237 86 r bpm;
+#X floatatom 237 124 5 0 0 0 - - -;
+#X obj 438 118 r bpm;
+#X obj 438 138 expr 1000*($f1/60)/4;
+#X text 350 138 /4 is 16th's;
+#X obj 438 218 expDist Skip;
+#X obj 438 328 s tableSkip;
+#X floatatom 511 310 5 0 0 1 sec_to_nxt_rhythm - -;
+#X obj 511 197 r minSkip;
+#X floatatom 489 179 5 0 0 1 sec_per_2_measures - -;
+#X obj 438 179 pow -1;
+#X msg 60 522 additveRhythm Copyright (c) 2020 Jerry Z Raski;
+#X obj 125 256 output~;
+#X obj 444 293 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 432 87 changes rhythm randomly;
+#X obj 511 291 / 1000;
+#X obj 66 567 vu 15 120 toLVU empty -1 -8 0 10 -1 -1 1 0;
+#X obj 127 567 vu 15 120 toRVU empty -1 -8 0 10 -1 -1 1 0;
+#N canvas 798 113 632 468 copyrightInfo2020 0;
+#X text 74 306 j.raski@gmail.com;
+#X text 43 19 This program creates generative music on an electronic
+synthesiser. Copyright (C) 2020 Jerry Z. Raski This program is free
+software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation \, either version 3 of the License \, or (at your option)
+any later version. This program is distributed in the hope that it
+will be useful \, but WITHOUT ANY WARRANTY \; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details. You should have received
+a copy of the GNU General Public License along with this program. If
+not \, see <https://www.gnu.org/licenses/>.;
+#X restore 127 542 pd copyrightInfo2020;
+#X obj 124 231 sigmoid~;
+#X obj 217 231 sigmoid~;
+#X msg 214 631 start;
+#X msg 219 649 stop;
+#X obj 188 672 writesf~ 2;
+#X msg 208 613 open -wave -little -bytes 2 addRhy.wav;
+#X obj 123 154 addRhythm rOne;
+#X obj 123 174 judySynth~ sOne;
+#N canvas 81 305 535 505 scalesWaves 0;
+#X obj 27 133 loadbang;
+#X obj 244 71 table waveform_sine;
+#X obj 244 90 table waveform_triangle;
+#X obj 244 110 table waveform_square;
+#X msg 64 157 \; waveform_sine sinesum 2048 1 \; waveform_sine normalize
+1 \;;
+#X msg 52 201 \; waveform_triangle sinesum 2048 1 0.5 0.333333 0.25
+0.2 0.166667 0.142857 0.125 0.111111 0.1 0.090909 0.0833333 0.076923
+\; waveform_triangle normalize 1 \;;
+#X msg 27 267 \; waveform_square sinesum 2048 1 0 0.333333 0 0.2 0
+0.142857 0 0.111111 0 0.090909 0 0.076923 0 0.066666 0 0.058823 0 0.052631
+0 0.047619 0 0.043478 0 0.04 0 0.037037 \; waveform_square normalize
+1 \;;
+#X obj 150 76 vradio 15 1 0 3 wave inWave waveform 0 -8 0 10 -262144
+-1 -1 1;
+#X text 118 74 sine;
+#X text 90 90 triangle;
+#X text 104 105 square;
+#X obj 116 353 table seq 5;
+#X obj 117 373 loadbang;
+#X text 179 373 harmonic scale based on 50Hz root;
+#X msg 116 392 \; seq 0 300 500 400 450 350 \;;
+#N canvas 798 113 632 468 copyrightInfo2020 0;
+#X text 74 306 j.raski@gmail.com;
+#X text 43 19 This program creates generative music on an electronic
+synthesiser. Copyright (C) 2020 Jerry Z. Raski This program is free
+software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation \, either version 3 of the License \, or (at your option)
+any later version. This program is distributed in the hope that it
+will be useful \, but WITHOUT ANY WARRANTY \; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details. You should have received
+a copy of the GNU General Public License along with this program. If
+not \, see <https://www.gnu.org/licenses/>.;
+#X restore 28 456 pd copyrightInfo2020;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 0 0 6 0;
+#X connect 12 0 14 0;
+#X restore 127 502 pd scalesWaves;
+#X obj 92 183 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 438 351 fbank fOne;
+#X obj 123 210 fbank~ fOne;
+#X obj 217 210 fbank~ fOne;
+#X obj 438 158 expr ($f1*32)/1000;
+#X text 371 160 32 16th's;
+#X text 404 100 on average every 2 measures;
+#X msg 61 438 \; bpm 80 \; initg 100 \; minSkip 5000 \; inWave 1 \;
+;
+#X connect 0 0 40 0;
+#X connect 1 0 16 0;
+#X connect 3 1 35 1;
+#X connect 3 1 36 1;
+#X connect 3 1 30 0;
+#X connect 3 2 6 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 1;
+#X connect 7 0 8 0;
+#X connect 8 0 37 0;
+#X connect 10 0 11 0;
+#X connect 10 0 18 0;
+#X connect 10 1 20 0;
+#X connect 13 0 10 1;
+#X connect 15 0 10 0;
+#X connect 16 0 2 0;
+#X connect 20 0 12 0;
+#X connect 24 0 17 0;
+#X connect 25 0 17 1;
+#X connect 26 0 28 0;
+#X connect 27 0 28 0;
+#X connect 29 0 28 0;
+#X connect 30 0 33 0;
+#X connect 30 0 31 0;
+#X connect 31 0 35 0;
+#X connect 31 0 36 0;
+#X connect 35 0 24 0;
+#X connect 36 0 25 0;
+#X connect 37 0 14 0;
+#X connect 37 0 15 0;
+#X coords 0 734 1 733 85 60 0;

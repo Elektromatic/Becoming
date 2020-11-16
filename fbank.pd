@@ -1,0 +1,31 @@
+#N canvas 705 183 343 460 10;
+#X obj 50 249 loadbang;
+#X obj 50 268 f \$0;
+#X obj 103 102 cnv 15 115 105 empty empty fbank_\$1 1 6 0 10 -220919
+-1 0;
+#X floatatom 179 171 5 0 0 0 n_stages #0-n_stages_ #1-n_stages;
+#X floatatom 179 153 5 0.1 1000 0 q #0-q_ #1-q;
+#X floatatom 179 189 5 0.1 10000 0 filter_tc #0-filter_tc_ #1-filter_tc
+;
+#X floatatom 179 135 5 0 0 0 freq_high #0-freq_high_ #1-freq_high;
+#X floatatom 179 117 5 0 0 0 freq_low #0-freq_low_ #1-freq_low;
+#X text 83 69 filter bank bandpass control;
+#N canvas 798 113 632 468 copyrightInfo2020 0;
+#X text 74 306 j.raski@gmail.com;
+#X text 43 19 This program creates generative music on an electronic
+synthesiser. Copyright (C) 2020 Jerry Z. Raski This program is free
+software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation \, either version 3 of the License \, or (at your option)
+any later version. This program is distributed in the hope that it
+will be useful \, but WITHOUT ANY WARRANTY \; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details. You should have received
+a copy of the GNU General Public License along with this program. If
+not \, see <https://www.gnu.org/licenses/>.;
+#X restore 84 268 pd copyrightInfo2020;
+#X msg 50 287 \; \$1-freq_low_ 40 \; \$1-freq_high_ 10000 \; \$1-q_
+10 \; \$1-n_stages_ 3 \; \$1-filter_tc_ 0.01 \;;
+#X connect 0 0 1 0;
+#X connect 1 0 10 0;
+#X coords 0 -1 1 1 120 110 1 100 100;

@@ -1,0 +1,108 @@
+#N canvas 1187 387 543 490 12;
+#X obj 141 60 inlet;
+#X obj 141 88 f 0;
+#X obj 141 111 + 1;
+#X obj 175 111 sel 0;
+#X obj 175 137 f 0;
+#X obj 175 160 + 1;
+#X obj 210 136 mod 5;
+#X obj 74 219 random 3;
+#X obj 74 238 sel 0;
+#X obj 74 259 random 2;
+#X obj 74 278 sel 0 1;
+#X obj 74 298 f 1;
+#X obj 102 298 f 4;
+#X floatatom 150 160 3 0 0 0 - - -;
+#X obj 168 218 tabread seq;
+#X obj 294 238 qenv~;
+#X obj 392 238 qenv~;
+#X obj 293 270 lop~ 300;
+#X obj 168 308 *~;
+#X obj 167 328 outlet~;
+#X obj 176 87 mod 1;
+#X msg 392 219 5 0 \, 0 20;
+#X text 71 20 plays forward and backward down the seq table. sends
+out enveloped \, bandlimited wave.;
+#X msg 294 219 10 0 \, 0 3000;
+#N canvas 918 193 419 383 bandWave 0;
+#X obj 106 89 phasor~;
+#X obj 106 109 *~ 2048;
+#X obj 106 129 +~ 1;
+#X obj 106 69 inlet;
+#X obj 105 244 outlet~;
+#X obj 169 109 sel 0 1 2;
+#X obj 169 89 r wave;
+#X msg 169 130 set waveform_sine;
+#X msg 169 153 set waveform_triangle;
+#X msg 170 175 set waveform_square;
+#X obj 105 221 tabread4~ waveform_triangle;
+#N canvas 798 113 632 468 copyrightInfo2020 0;
+#X text 74 306 j.raski@gmail.com;
+#X text 43 19 This program creates generative music on an electronic
+synthesiser. Copyright (C) 2020 Jerry Z. Raski This program is free
+software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation \, either version 3 of the License \, or (at your option)
+any later version. This program is distributed in the hope that it
+will be useful \, but WITHOUT ANY WARRANTY \; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details. You should have received
+a copy of the GNU General Public License along with this program. If
+not \, see <https://www.gnu.org/licenses/>.;
+#X restore 28 336 pd copyrightInfo2020;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 10 0;
+#X connect 3 0 0 0;
+#X connect 5 0 7 0;
+#X connect 5 1 8 0;
+#X connect 5 2 9 0;
+#X connect 6 0 5 0;
+#X connect 7 0 10 0;
+#X connect 8 0 10 0;
+#X connect 9 0 10 0;
+#X connect 10 0 4 0;
+#X restore 168 257 pd bandWave;
+#N canvas 798 113 632 468 copyrightInfo2020 0;
+#X text 74 306 j.raski@gmail.com;
+#X text 43 19 This program creates generative music on an electronic
+synthesiser. Copyright (C) 2020 Jerry Z. Raski This program is free
+software: you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the Free Software
+Foundation \, either version 3 of the License \, or (at your option)
+any later version. This program is distributed in the hope that it
+will be useful \, but WITHOUT ANY WARRANTY \; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+the GNU General Public License for more details. You should have received
+a copy of the GNU General Public License along with this program. If
+not \, see <https://www.gnu.org/licenses/>.;
+#X restore 30 370 pd copyrightInfo2020;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 3 0;
+#X connect 2 0 20 0;
+#X connect 3 0 4 0;
+#X connect 3 0 7 0;
+#X connect 3 0 23 0;
+#X connect 3 0 21 0;
+#X connect 4 0 5 0;
+#X connect 4 0 13 0;
+#X connect 4 0 14 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 1;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 10 1 12 0;
+#X connect 11 0 5 1;
+#X connect 12 0 5 1;
+#X connect 14 0 24 0;
+#X connect 15 0 17 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 1;
+#X connect 18 0 19 0;
+#X connect 20 0 1 1;
+#X connect 21 0 16 0;
+#X connect 23 0 15 0;
+#X connect 24 0 18 0;
